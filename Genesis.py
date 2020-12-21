@@ -48,23 +48,27 @@ def CommandLine(command):
     else:
         Talk("Command not found")
 
+#Get Current System Time
 def CurrentTime():
     Talk("Current time is "+datetime.now().strftime('%I:%M'))
 
+#Get Current System Date
 def CurrentDate():
     Talk("Current date is "+datetime.today().strftime('%d %B %Y'))
 
+#Get Current weather
 def CurrentWeather(command):
     webbrowser.get().open_new_tab("https://google.com/search?q="+command)
     Talk("Here is the info of the current wheather")
 
+#Search Specific Things In Googles
 def SearchWho(command):
     search = command.replace('who is', '', 1)
     info = wikipedia.summary(search, 1)
     # pywhatkit.search(command)
     webbrowser.get().open_new_tab("https://google.com/search?q="+command)
     Talk(info)
-
+#Search Specific Things In Googles
 def SearchWhat(command):
     search = command.replace('what is', '', 1)
     info = wikipedia.summary(search, 1)
@@ -72,37 +76,20 @@ def SearchWhat(command):
     webbrowser.get().open_new_tab("https://google.com/search?q="+command)
     Talk(info)
 
+#Play YouTube Videos
 def PlayYoutube(command):
     song = command.replace('play', '', 1)
     Talk("Playing"+song)
     pywhatkit.playonyt(song)
 
-def TakeCommand(check):
-    if(check):
-        print("I'm Listenning...")
-        Talk("I'm Listenning...")
-    else:
-        print("Call Me Please...")
-
+def TakeCommand():
+    with sr.Microphone() as source:
+        voice = listener.listen(source)
     try:
-        with sr.Microphone() as source:
-            voice = listener.listen(source)
-            command = listener.recognize_google(voice).lower()
-        if check == 0:
-            if 'genesis' in command: #Check If It Calls
-                TakeCommand(1) #Trigger The Command To Take Command
-        else:
-            if "i'm good" in command:
-                Talk("See you later sir")
-            else:
-                print(command)
-                CommandLine(command)
+        command = listener.recognize_google(voice).lower()
     except:
-        if check == 1:
-            if "i'm good" not in command:
-                Talk("Can't catch that one")
-
-    TakeCommand(0)
+        return "..."
+    return command
 
 def WishMe():
     hour = datetime.now().hour
@@ -119,4 +106,20 @@ def WishMe():
 
 WishMe()
 Talk("Genesis is ready!")
-TakeCommand(0)
+
+while True:
+    call = TakeCommand()
+    if 'genesis' in call:
+        print("I'm Listenning...")
+        Talk("I'm Listenning...")
+        command = TakeCommand()
+        if "i'm good" in command:
+            Talk("See you later sir!")
+            exit()
+        elif command == "...":
+            print("Can't catch that one")
+            Talk("Can't catch that one")
+        else:
+            CommandLine(command)
+    elif call == "...":
+        print("Call Me Please...")
