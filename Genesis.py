@@ -1,19 +1,14 @@
 import speech_recognition as sr #Voice Recog
 import pyttsx3 # TTS
-from datetime import datetime #For Time Purposes
-import os
-import pywhatkit #Play Youtube
-import webbrowser #For Searching Purposes
-import wikipedia #Summary Informations
 import pyautogui as pyag #For Screenshots
-import json #To read Json Files
 import psutil #To Get Battery and CPU
+import CommandSections #Store lot of Command
 
 tts = pyttsx3.init('sapi5')
 listener = sr.Recognizer()
 listener.pause_threshold = 0.5
 
-querys = ["who is", "what is", "time", "date", "play", "weather", "screenshot", "battery"]
+querys = ["who is", "what is", "time", "date", "play", "weather", "screenshot", "battery", "open"]
 wisher = ["Good Morning Sir!", "Good Afternoon Sir!", "Good Night Sir!"]
 
 #Get BitRate
@@ -37,78 +32,45 @@ def NewCheckQuery(querys, command):
         if query in command:
             return True
 
-#Get Current System Time
-def CurrentTime():
-    Talk("Current time is "+datetime.now().strftime('%I:%M'))
-
-#Get Current System Date
-def CurrentDate():
-    Talk("Current date is "+datetime.today().strftime('%d %B %Y'))
-
-#Get Current weather
-def CurrentWeather(command):
-    webbrowser.get().open_new_tab("https://google.com/search?q="+command)
-    Talk("Here is the info of the current wheather")
-
-#Search Specific Things In Googles
-def SearchWho(command):
-    search = command.replace('who is', '', 1)
-    info = wikipedia.summary(search, 1)
-    # pywhatkit.search(command)
-    webbrowser.get().open_new_tab("https://google.com/search?q="+command)
-    Talk(info)
-#Search Specific Things In Googles
-def SearchWhat(command):
-    search = command.replace('what is', '', 1)
-    info = wikipedia.summary(search, 1)
-    # pywhatkit.search(command)
-    webbrowser.get().open_new_tab("https://google.com/search?q="+command)
-    Talk(info)
-
-#Play YouTube Videos
-def PlayYoutube(command):
-    song = command.replace('play', '', 1)
-    Talk("Playing"+song)
-    pywhatkit.playonyt(song)
-
 #Screenshots the entire screens
 def Screenshots():
     img = pyag.screenshot()
-    with open('settings.json') as jsons:
-        data = json.load(jsons)
-        path = data['SaveScreen_Shots']
-        if not os.path.exists(data['SaveScreen_Shots']):
-            os.mkdir(path)
+    filename = CommandSections.Screenshots()
+    img.save(filename)
 
-        date = datetime.today().strftime('%d-%m-%y')
-        time = datetime.today().strftime('%H-%M-%S')
-        filename = "/Genesis_"+date+"_"+time+".png"
-        img.save(data['SaveScreen_Shots']+filename)
+    if CommandSections.os.path.exists(filename):
+        Talk("Screenshots Taken!")
 
-        if os.path.exists(path+filename):
-            Talk("Screenshots Taken!")
+#Open Apps
+def OpenApps(commands):
+    path = CommandSections.AppsPath(commands)
+    CommandSections.os.popen(path)
+    Talk("Opening "+CommandSections.AppsName(commands))
 
+#Get Current Battery
 def GetBattery():
     return psutil.sensors_battery()
 
 def CommandLine(command):
     if CheckQuery(command):
-        if NewCheckQuery(["time", "date", "weather", "battery"], command):
+        if NewCheckQuery(["time", "date", "weather", "battery", "open"], command):
             if 'time' in command:
-                CurrentTime()
+                Talk(CommandSections.CurrentTime())
             if 'date' in command:
-                CurrentDate()
+                Talk(CommandSections.CurrentDate())
             if 'weather' in command:
-                CurrentWeather(command)
+                Talk(CommandSections.CurrentWeather(command))
             if 'battery' in command:
                 Talk("Your current battery is "+str(GetBattery().percent)+"%")
+            if 'open' in command:
+                OpenApps(command)
         if not NewCheckQuery(["time", "date", "weather", "battery"], command):
             if 'who is' in command:
-                SearchWho(command)
+                return(CommandSections.SearchWho(command))
             if 'what is' in command:
-                SearchWhat(command)
+                Talk(CommandSections.SearchWhat(command))
         if 'play' in command:
-            PlayYoutube(command)
+            Talk(CommandSections.PlayYoutube(command))
         if 'screenshot' in command:
             Screenshots()
     else:
@@ -124,7 +86,7 @@ def TakeCommand():
     return command
 
 def WishMe():
-    hour = datetime.now().hour
+    hour = CommandSections.datetime.now().hour
 
     if hour >= 0 and hour < 12:
         print(wisher[0])

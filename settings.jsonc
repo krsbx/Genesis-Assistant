@@ -1,0 +1,69 @@
+{
+    //Screenshots folder path
+    "SaveScreen_Shots":"C:/Users/ACER/Pictures/Genesis Screenshots",
+    //Applications variables
+    "Applications":["Programs1","Programs2","Programs3","Programs4","Programs5","Programs6"],
+    //Applications to open
+    "Programs":[
+        {
+            //Programs variables need to be same as Applications variables name
+            "Programs1":{
+                //Will be used in opening the Applications
+                // Lower case only
+                "ApplicationsName":"unity",
+                //Applications path to run
+                "ApplicationsPath":"C:/Program Files/Unity Hub/Unity Hub.exe"
+            }
+        },
+        {
+            //Programs variables need to be same as Applications variables name
+            "Programs2":{
+                //Will be used in opening the Applications
+                // Lower case only
+                "ApplicationsName":"edge",
+                //Applications path to run
+                "ApplicationsPath":"C:/Program Files (x86)/Microsoft/Edge/Application"
+            }
+        },
+        {
+            //Programs variables need to be same as Applications variables name
+            "Programs3":{
+                //Will be used in opening the Applications
+                // Lower case only
+                "ApplicationsName":"",
+                //Applications path to run
+                "ApplicationsPath":""
+            }
+        },
+        {
+            //Programs variables need to be same as Applications variables name
+            "Programs4":{
+                //Will be used in opening the Applications
+                // Lower case only
+                "ApplicationsName":"",
+                //Applications path to run
+                "ApplicationsPath":""
+            }
+        },
+        {
+            //Programs variables need to be same as Applications variables name
+            "Programs5":{
+                //Will be used in opening the Applications
+                // Lower case only
+                "ApplicationsName":"",
+                //Applications path to run
+                "ApplicationsPath":""
+            }
+        },
+        {
+            //Programs variables need to be same as Applications variables name
+            "Programs6":{
+                //Will be used in opening the Applications
+                // Lower case only
+                "ApplicationsName":"",
+                //Applications path to run
+                "ApplicationsPath":""
+            }
+        }
+    ]
+}
