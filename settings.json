@@ -1,40 +1,46 @@
 {
-    "SaveScreen_Shots": "C:/Users/ACER/Pictures/Genesis Screenshots",
+    "SaveScreen_Shots": "%userprofile%/Pictures/Genesis Screenshots",
     "Applications": ["Programs1", "Programs2", "Programs3", "Programs4", "Programs5", "Programs6"],
     "Programs": [
        {
           "Programs1": {
-             "ApplicationsName": "unity",
+             "ApplicationsName": "Unity Hub",
+             "ApplicationsReference":"unity",
              "ApplicationsPath": "C:/Program Files/Unity Hub/Unity Hub.exe"
           }
        },
        {
           "Programs2": {
-             "ApplicationsName": "edge",
+             "ApplicationsName": "Microsoft Edge",
+             "ApplicationsReference":"edge",
              "ApplicationsPath": "C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"
           }
        },
        {
           "Programs3": {
              "ApplicationsName": "",
+             "ApplicationsReference":"",
              "ApplicationsPath": ""
           }
        },
        {
           "Programs4": {
              "ApplicationsName": "",
+             "ApplicationsReference":"",
              "ApplicationsPath": ""
           }
        },
        {
           "Programs5": {
              "ApplicationsName": "",
+             "ApplicationsReference":"",
              "ApplicationsPath": ""
           }
        },
        {
           "Programs6": {
              "ApplicationsName": "",
+             "ApplicationsReference":"",
              "ApplicationsPath": ""
           }
        }

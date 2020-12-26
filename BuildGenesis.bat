@@ -1,0 +1,1 @@
+pyinstaller --hidden-import=pyttsx3.drivers --nowindowed --onefile Genesis.py

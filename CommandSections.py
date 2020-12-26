@@ -20,16 +20,22 @@ def CurrentWeather(command):
 
 #Search Specific Things In Googles
 def SearchWho(command):
-    search = command.replace('who is', '', 1)
-    info = wikipedia.summary(search, 1)
-    webbrowser.get().open_new_tab("https://google.com/search?q="+command)
-    return info
+    if len(command.split()) > 2:
+        search = command.replace('who is', '', 1)
+        info = wikipedia.summary(search, 1)
+        webbrowser.get().open_new_tab("https://google.com/search?q="+command)
+        return info
+    else:
+        return "Please Be Specific"
 #Search Specific Things In Googles
 def SearchWhat(command):
-    search = command.replace('what is', '', 1)
-    info = wikipedia.summary(search, 1)
-    webbrowser.get().open_new_tab("https://google.com/search?q="+command)
-    return info
+    if len(command.split()) > 2:
+        search = command.replace('what is', '', 1)
+        info = wikipedia.summary(search, 1)
+        webbrowser.get().open_new_tab("https://google.com/search?q="+command)
+        return info
+    else:
+        return "Please Be Specific"
 
 #Play YouTube Videos
 def PlayYoutube(command):
@@ -47,7 +53,7 @@ def AppsPath(command):
         for i in range(len(appsName)):
             temp = 'Programs'+str(i+1)
         
-            if programs[i][temp]['ApplicationsName'] in command:
+            if programs[i][temp]['ApplicationsReference'] in command:
                 return programs[i][temp]['ApplicationsPath']
 
 #Get Apps name
@@ -60,7 +66,7 @@ def AppsName(command):
         for i in range(len(appsName)):
             temp = 'Programs'+str(i+1)
         
-            if programs[i][temp]['ApplicationsName'] in command:
+            if programs[i][temp]['ApplicationsReference'] in command:
                 return programs[i][temp]['ApplicationsName']
 
 #Get Screenshot path and name
@@ -68,6 +74,7 @@ def Screenshots():
     with open('settings.json') as jsons:
         data = json.load(jsons)
         path = data['SaveScreen_Shots']
+        path = path.replace("%userprofile%",os.getenv("userprofile"))
         if not os.path.exists(path):
             os.mkdir(path)
         

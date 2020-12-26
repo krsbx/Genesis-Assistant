@@ -2,7 +2,7 @@ import speech_recognition as sr #Voice Recog
 import pyttsx3 # TTS
 import pyautogui as pyag #For Screenshots
 import psutil #To Get Battery and CPU
-import CommandSections #Store lot of Command
+import CommandSections as cs #Store lot of Command
 
 tts = pyttsx3.init('sapi5')
 listener = sr.Recognizer()
@@ -35,17 +35,17 @@ def NewCheckQuery(querys, command):
 #Screenshots the entire screens
 def Screenshots():
     img = pyag.screenshot()
-    filename = CommandSections.Screenshots()
+    filename = cs.Screenshots()
     img.save(filename)
 
-    if CommandSections.os.path.exists(filename):
+    if cs.os.path.exists(filename):
         Talk("Screenshots Taken!")
 
 #Open Apps
 def OpenApps(commands):
-    path = CommandSections.AppsPath(commands)
-    CommandSections.os.popen(path)
-    Talk("Opening "+CommandSections.AppsName(commands))
+    path = cs.AppsPath(commands)
+    cs.os.popen(path)
+    Talk("Opening "+cs.AppsName(commands))
 
 #Get Current Battery
 def GetBattery():
@@ -55,22 +55,22 @@ def CommandLine(command):
     if CheckQuery(command):
         if NewCheckQuery(["time", "date", "weather", "battery", "open"], command):
             if 'time' in command:
-                Talk(CommandSections.CurrentTime())
+                Talk(cs.CurrentTime())
             if 'date' in command:
-                Talk(CommandSections.CurrentDate())
+                Talk(cs.CurrentDate())
             if 'weather' in command:
-                Talk(CommandSections.CurrentWeather(command))
+                Talk(cs.CurrentWeather(command))
             if 'battery' in command:
                 Talk("Your current battery is "+str(GetBattery().percent)+"%")
             if 'open' in command:
                 OpenApps(command)
         if not NewCheckQuery(["time", "date", "weather", "battery"], command):
             if 'who is' in command:
-                return(CommandSections.SearchWho(command))
+                return(cs.SearchWho(command))
             if 'what is' in command:
-                Talk(CommandSections.SearchWhat(command))
+                Talk(cs.SearchWhat(command))
         if 'play' in command:
-            Talk(CommandSections.PlayYoutube(command))
+            Talk(cs.PlayYoutube(command))
         if 'screenshot' in command:
             Screenshots()
     else:
@@ -86,7 +86,7 @@ def TakeCommand():
     return command
 
 def WishMe():
-    hour = CommandSections.datetime.now().hour
+    hour = cs.datetime.now().hour
 
     if hour >= 0 and hour < 12:
         print(wisher[0])
@@ -106,6 +106,7 @@ firstRun = True
 
 while True:
     print("Call Me Please...")
+    
     if firstRun:
         Talk("The Current Battery is "+str(GetBattery().percent)+"%")
         firstRun = False
@@ -118,6 +119,7 @@ while True:
     else:
         if batCount == 1:
             batCount = 0
+
     call = TakeCommand()
     if 'genesis' in call:
         print("I'm Listenning...")

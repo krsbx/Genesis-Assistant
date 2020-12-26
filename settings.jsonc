@@ -8,9 +8,11 @@
         {
             //Programs variables need to be same as Applications variables name
             "Programs1":{
+                //Will be used as response when running applications
+                "ApplicationsName": "Unity Hub",
                 //Will be used in opening the Applications
                 // Lower case only
-                "ApplicationsName":"unity",
+                "ApplicationsReference":"unity",
                 //Applications path to run
                 "ApplicationsPath":"C:/Program Files/Unity Hub/Unity Hub.exe"
             }
@@ -18,9 +20,11 @@
         {
             //Programs variables need to be same as Applications variables name
             "Programs2":{
+                //Will be used as response when running applications
+                "ApplicationsName": "Microsoft Edge",
                 //Will be used in opening the Applications
                 // Lower case only
-                "ApplicationsName":"edge",
+                "ApplicationsReference":"edge",
                 //Applications path to run
                 "ApplicationsPath":"C:/Program Files (x86)/Microsoft/Edge/Application"
             }
@@ -28,9 +32,11 @@
         {
             //Programs variables need to be same as Applications variables name
             "Programs3":{
+                //Will be used as response when running applications
+                "ApplicationsName": "",
                 //Will be used in opening the Applications
                 // Lower case only
-                "ApplicationsName":"",
+                "ApplicationsReference":"",
                 //Applications path to run
                 "ApplicationsPath":""
             }
@@ -38,9 +44,11 @@
         {
             //Programs variables need to be same as Applications variables name
             "Programs4":{
+                //Will be used as response when running applications
+                "ApplicationsName": "",
                 //Will be used in opening the Applications
                 // Lower case only
-                "ApplicationsName":"",
+                "ApplicationsReference":"",
                 //Applications path to run
                 "ApplicationsPath":""
             }
@@ -48,9 +56,11 @@
         {
             //Programs variables need to be same as Applications variables name
             "Programs5":{
+                //Will be used as response when running applications
+                "ApplicationsName": "",
                 //Will be used in opening the Applications
                 // Lower case only
-                "ApplicationsName":"",
+                "ApplicationsReference":"",
                 //Applications path to run
                 "ApplicationsPath":""
             }
@@ -58,9 +68,11 @@
         {
             //Programs variables need to be same as Applications variables name
             "Programs6":{
+                //Will be used as response when running applications
+                "ApplicationsName": "",
                 //Will be used in opening the Applications
                 // Lower case only
-                "ApplicationsName":"",
+                "ApplicationsReference":"",
                 //Applications path to run
                 "ApplicationsPath":""
             }
